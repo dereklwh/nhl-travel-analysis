@@ -22,7 +22,8 @@ def main():
     nhl_stadium_df = pd.concat([nhl_stadium_df, utah_row], ignore_index=True)
     nhl_stadium_df = nhl_stadium_df.merge(abbrev_map_df, on="Team", how="left")
 
-
+    # rename Team column to venue_team
+    nhl_stadium_df = nhl_stadium_df.rename(columns={"Team": "venue_team"})
 
     nhl_stadium_df.to_csv('processed_data/nhl_stadiums.csv', index=False)
     print("Successfully saved NHL stadium data with team abbreviations.")

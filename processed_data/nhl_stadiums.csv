@@ -1,4 +1,4 @@
-Team,League,Division,Lat,Long,Abbrev
+venue_team,League,Division,Lat,Long,Abbrev
 Tampa Bay Lightning,NHL,Atlantic,27.9427,-82.4518,TBL
 Dallas Stars,NHL,Central,32.790556,-96.810278,DAL
 Colorado Avalanche,NHL,Central,39.7487,-105.0076,COL
