@@ -10,7 +10,20 @@ def main():
     
     # TODO: need to get the abbreviation for each team and merge on full team name
 
+    # HARD CODE: UTAH ARENA
+    # https://www.latlong.net/place/vivint-arena-ut-usa-32358.html
+    utah_row = pd.DataFrame({
+        "Team": ["Utah Mammoth"],
+        "League": ["NHL"],
+        "Division": ["Central"],
+        "Lat": [40.7684],
+        "Long": [-111.9016],
+    })
+    nhl_stadium_df = pd.concat([nhl_stadium_df, utah_row], ignore_index=True)
     nhl_stadium_df = nhl_stadium_df.merge(abbrev_map_df, on="Team", how="left")
+
+
+
     nhl_stadium_df.to_csv('processed_data/nhl_stadiums.csv', index=False)
     print("Successfully saved NHL stadium data with team abbreviations.")
 

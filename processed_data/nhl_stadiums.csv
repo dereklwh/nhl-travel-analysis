@@ -2,11 +2,11 @@ Team,League,Division,Lat,Long,Abbrev
 Tampa Bay Lightning,NHL,Atlantic,27.9427,-82.4518,TBL
 Dallas Stars,NHL,Central,32.790556,-96.810278,DAL
 Colorado Avalanche,NHL,Central,39.7487,-105.0076,COL
-Montreal Canadiens,NHL,Atlantic,45.496111,-73.569444,MON
+Montreal Canadiens,NHL,Atlantic,45.496111,-73.569444,MTL
 Nashville Predators,NHL,Central,36.159167,-86.778611,NSH
 Winnipeg Jets,NHL,Central,49.892778,-97.143611,WPG
 Ottawa Senators,NHL,Atlantic,45.2969,-75.9268,OTT
-Washington Capitals,NHL,Metropolitan,38.8982,-77.0209,WAS
+Washington Capitals,NHL,Metropolitan,38.8982,-77.0209,WSH
 Seattle Kraken,NHL,Pacific,47.622,-122.354,SEA
 Los Angeles Kings,NHL,Pacific,34.043056,-118.267222,LAK
 St. Louis Blues,NHL,Central,38.626667,-90.2025,STL
@@ -31,3 +31,4 @@ New York Islanders,NHL,Metropolitan,40.712094,-73.727157,NYI
 Chicago Blackhawks,NHL,Central,41.880556,-87.674167,CHI
 Philadeliphia Flyers,NHL,Metropolitan,39.901111,-75.171944,PHI
 Minnesota Wild,NHL,Central,44.944722,-93.101111,MIN
+Utah Mammoth,NHL,Central,40.7684,-111.9016,UTA

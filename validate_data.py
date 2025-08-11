@@ -1,9 +1,11 @@
 import pandas as pd
+import sys
 
-def main():
+def main(file1):
     # Load the games data
     try:
-        games_df = pd.read_csv('raw_data/nhl_games_raw.csv')
+        # games_df = pd.read_csv('raw_data/nhl_games_raw.csv')
+        games_df = pd.read_csv(file1)
         print("Games data loaded successfully.")
     except Exception as e:
         print(f"Error loading games data: {e}")
@@ -19,4 +21,6 @@ def main():
         print("No missing values found in any column.")
 
 if __name__ == "__main__":
-    main()
+    file1 = sys.argv[1]
+
+    main(file1)
