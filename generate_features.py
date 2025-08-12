@@ -28,12 +28,14 @@ def build_schedule_per_team(df) -> pd.DataFrame:
     home['goals_against'] = home['away_team_score']
     home['is_away'] = False
     home['game_result'] = np.where(home['winner_abbrev'] == home['team'], 'win', 'loss')
+    home['goal_difference'] = home['goals_for'] - home['goals_against']
 
     away['team'] = away['away_team_abbrev']
     away['goals_for'] = away['away_team_score']
     away['goals_against'] = away['home_team_score']
     away['is_away'] = True
     away['game_result'] = np.where(away['winner_abbrev'] == away['team'], 'win', 'loss')
+    away['goal_difference'] = away['goals_for'] - away['goals_against']
 
     combined = pd.concat([home, away], ignore_index=True)
     combined = combined.sort_values(by=['team', 'game_date', 'start_time_utc'])
