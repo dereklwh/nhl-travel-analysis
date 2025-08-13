@@ -1,8 +1,25 @@
 import numpy as np
 import pandas as pd
+import os
+
+def combine_raw_files() -> pd.DataFrame:
+    # get all games that start with "nhl_games_raw..." in the raw_data directory
+    raw_data_dir = 'raw_data'
+    game_files = [f for f in os.listdir(raw_data_dir) if f.startswith('nhl_games_raw_') and f.endswith('.csv')]
+
+    # concat them into a single dataframe
+    games_list = []
+    for file in game_files:
+        file_path = os.path.join(raw_data_dir, file)
+        df = pd.read_csv(file_path)
+        games_list.append(df)
+
+    all_games = pd.concat(games_list, ignore_index=True)
+    return all_games
+    # merge them with the stadiums data on home_team_abbrev
 
 def main():
-    games = pd.read_csv('raw_data/nhl_games_raw.csv')
+    games = combine_raw_files()
     stadiums = pd.read_csv('processed_data/nhl_stadiums.csv')
 
     # Rename columns for consistency
@@ -32,6 +49,10 @@ def main():
 
     print("Merged DataFrame:")
     print(merged.head())
+
+    df_len = len(merged)
+    print("Total rows: ", df_len)
+    print("Total seasons merged: ", df_len / 1312)
     merged.to_csv('processed_data/merged_schedule.csv', index=False)
 
 if __name__ == "__main__":

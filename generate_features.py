@@ -38,7 +38,7 @@ def build_schedule_per_team(df) -> pd.DataFrame:
     away['goal_difference'] = away['goals_for'] - away['goals_against']
 
     combined = pd.concat([home, away], ignore_index=True)
-    combined = combined.sort_values(by=['team', 'game_date', 'start_time_utc'])
+    combined = combined.sort_values(by=['season', 'team', 'game_date', 'start_time_utc'])
     return combined
 
 # From assignment 3 
@@ -62,8 +62,8 @@ def distance(df) -> pd.DataFrame:
 def generate_travel_features(games) -> pd.DataFrame:
     # 1: Distance Travelled
     # shift previous venue information for havarsine calculation
-    games['venue_lat_prev'] = games.groupby('team')['venue_lat'].shift(1)
-    games['venue_lon_prev'] = games.groupby('team')['venue_lon'].shift(1)
+    games['venue_lat_prev'] = games.groupby(['season', 'team'])['venue_lat'].shift(1)
+    games['venue_lon_prev'] = games.groupby(['season', 'team'])['venue_lon'].shift(1)
 
     # if there is a nan value for prev longitude and longitude that means it is start of season, assume that their prev lat and lon is same
     games['venue_lat_prev'] = games['venue_lat_prev'].fillna(games['venue_lat'])
@@ -72,12 +72,21 @@ def generate_travel_features(games) -> pd.DataFrame:
     games = distance(games)
 
     # 2: Consecutive away games
-    games['consecutive_away_games'] = games.groupby('team')['is_away'].cumsum()
-    games['consecutive_away_games'] = games['consecutive_away_games'].where(games['is_away'], 0)
+    # increment for consecutive home games
+    games['consecutive_home_games'] = (~games['is_away']).groupby([games['season'], games['team']]).cumsum()
+
+    # 2) cumsum of away flags within each block of consecutive home games
+    games['consecutive_away_games'] = (
+        games.groupby(['season','team','consecutive_home_games'])['is_away']
+            .cumsum()
+            .where(games['is_away'], 0)
+            .astype(int)
+    )
+    games.drop(columns='consecutive_home_games', inplace=True)
 
     # 3: Rest days
     games['game_date'] = pd.to_datetime(games['game_date'])
-    games['rest_days'] = games.groupby('team')['game_date'].diff().dt.days - 1 # eg: games between 01-01 and 01-02 should be considered 0 rest days
+    games['rest_days'] = games.groupby(['season', 'team'])['game_date'].diff().dt.days - 1 # eg: games between 01-01 and 01-02 should be considered 0 rest days
     games['rest_days'] = games['rest_days'].fillna(0)
 
     # 4: back to back flag

@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import requests
+import sys
 
 BASE_URL = "https://api-web.nhle.com/v1/"
 
@@ -85,7 +86,7 @@ def get_all_games(season: str) -> pd.DataFrame:
 
 
     
-def main():
+def main(season):
     # base_url = 'https://api-web.nhle.com/v1/'
     # end_point = 'roster/VAN/current'
     # test_url = base_url + end_point
@@ -99,9 +100,11 @@ def main():
 
     # van_sched_df = normalize_schedule_games(van_json)
     # print(van_sched_df.head())
-
     # van_sched_df.to_csv('van_schedule_20242025.csv', index=False)
-    all_games = get_all_games('20242025')
+
+    ## Check season format:
+    all_games = get_all_games(season)
+    
     all_games = winner_cols(all_games)
     # Save the DataFrame to a CSV file
 
@@ -110,7 +113,8 @@ def main():
     all_games = all_games.drop_duplicates(subset=['game_id']).reset_index(drop=True)
     print(f"Total games collected: {len(all_games)}") # should be 1312
 
-    all_games.to_csv('raw_data/nhl_games_raw.csv', index=False)
+    filename = 'raw_data/nhl_games_raw_' + season + '.csv'
+    all_games.to_csv(filename, index=False)
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1])
