@@ -1,4 +1,5 @@
 # nhl-travel-analysis
+![NHL Hockey](assets/hockey_photo.jpg)
 
 ## Project Overview
 This project examines whether travel burden is associated with team performance in the NHL. Using schedule data and arena coordinates to compute leg-by-leg travel distance, and extracting features such as rest days, consecutive away games, and time zone jumps, I explore schedule equity and if the distance traveled correlates with win percentage. From my exploration of data between 2022-2025 (3 NHL season), there is no suggested correlation between win percentage and travel distance. However, a key finding is that home teams win more on average than away teams for all 3 seasons analyzed. While distance traveled doesn’t have a strong correlation, away teams are still more likely to lose. Travel distance could still be an attributing factor to that statistic.
