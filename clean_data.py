@@ -1,1 +1,0 @@
-# This file cleans NHL travel data by removing unnecessary columns and renaming others.

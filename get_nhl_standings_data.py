@@ -1,7 +1,10 @@
 import pandas as pd
 import requests
-
-
+'''
+Scrape NHL standings data for the last three seasons.
+Input: None
+Output: nhl_standings_merged.csv in processed_data directory
+'''
 def scrapeStandings(date):
     url = f"https://api-web.nhle.com/v1/standings/{date}"
 

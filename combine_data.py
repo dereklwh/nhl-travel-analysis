@@ -2,6 +2,14 @@ import numpy as np
 import pandas as pd
 import os
 
+'''
+This script combines all NHL raw game data files into a single DataFrame,
+merges it with stadium data, and cleans up the venue information for neutral site games.
+
+Input: all nhl raw files in raw_data directory
+Output: merged_data.csv in processed_data directory
+'''
+
 def combine_raw_files() -> pd.DataFrame:
     # get all games that start with "nhl_games_raw..." in the raw_data directory
     raw_data_dir = 'raw_data'

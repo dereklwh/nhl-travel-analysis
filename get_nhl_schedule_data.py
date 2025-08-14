@@ -3,6 +3,13 @@ import pandas as pd
 import requests
 import sys
 
+'''
+Get NHL schedule data for the 2024-2025 season.
+Input: string season (e.g. "20242025")
+Output: nhl_games_raw_20242025.csv in raw_data directory
+'''
+
+
 BASE_URL = "https://api-web.nhle.com/v1/"
 
 TEAM_ABBREVS_2425 = [
@@ -87,22 +94,7 @@ def get_all_games(season: str) -> pd.DataFrame:
 
     
 def main(season):
-    # base_url = 'https://api-web.nhle.com/v1/'
-    # end_point = 'roster/VAN/current'
-    # test_url = base_url + end_point
-    # print(get_nhl_data_test(test_url))
-    # van_json = get_team_schedule_data('VAN', '20242025')
-    # print(van_json)
-
-    # # process the json further
-    # van_schedule_df = pd.json_normalize(van_json['games'])
-    # print(van_schedule_df)
-
-    # van_sched_df = normalize_schedule_games(van_json)
-    # print(van_sched_df.head())
-    # van_sched_df.to_csv('van_schedule_20242025.csv', index=False)
-
-    ## Check season format:
+    # Check season format:
     all_games = get_all_games(season)
     
     all_games = winner_cols(all_games)
